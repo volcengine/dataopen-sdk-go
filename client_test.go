@@ -39,7 +39,7 @@ func TestGetRequest(t *testing.T) {
 
 	body := make(map[string]interface{})
 
-	res, err := client.request("/libra/openapi/v1/open/flight-list", "GET", headers, params, body)
+	res, err := client.request("/xxx/openapi/v1/open/flight-list", "GET", headers, params, body)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -62,7 +62,7 @@ func TestPostRequest(t *testing.T) {
 	body["uid_list"] = []string{"1111111110000"}
 
 	res, err := client.request(
-		"/libra/openapi/v1/open/flight/version/6290880/add-test-user",
+		"/xxx/openapi/v1/open/flight/version/6290880/add-test-user",
 		"POST",
 		headers,
 		params,
