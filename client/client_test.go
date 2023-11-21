@@ -12,18 +12,18 @@ func TestGetToken(t *testing.T) {
 
 	client := Client(app_id, app_secret, "", "", "")
 
-	if err := client.get_token(); err != nil {
+	if err := client.GetToken(); err != nil {
 		t.Fatal(err)
 	}
 
-	fmt.Println("is_authenticated", client.is_authenticated())
+	fmt.Println("is_authenticated", client.IsAuthenticated())
 
-	if !client.is_authenticated() {
+	if !client.IsAuthenticated() {
 		t.Errorf("Expected access token to not be null")
 	}
 }
 
-// Test request GET
+// Test Request GET
 func TestGetRequest(t *testing.T) {
 	app_id := ""
 	app_secret := ""
@@ -39,7 +39,7 @@ func TestGetRequest(t *testing.T) {
 
 	body := make(map[string]interface{})
 
-	res, err := client.request("/xxx/openapi/v1/open/flight-list", "GET", headers, params, body)
+	res, err := client.Request("/xxx/openapi/v1/open/flight-list", "GET", headers, params, body)
 	if err != nil {
 		t.Fatal(err)
 	}
@@ -47,7 +47,7 @@ func TestGetRequest(t *testing.T) {
 	fmt.Println("Output: ", res)
 }
 
-// Test request POST
+// Test Request POST
 func TestPostRequest(t *testing.T) {
 	app_id := ""
 	app_secret := ""
@@ -61,7 +61,7 @@ func TestPostRequest(t *testing.T) {
 	body := make(map[string]interface{})
 	body["uid_list"] = []string{"1111111110000"}
 
-	res, err := client.request(
+	res, err := client.Request(
 		"/xxx/openapi/v1/open/flight/version/6290880/add-test-user",
 		"POST",
 		headers,
@@ -75,7 +75,7 @@ func TestPostRequest(t *testing.T) {
 	fmt.Println("Output: ", res)
 }
 
-// Test material request POST
+// Test material Request POST
 func TestPostMaterialRequest(t *testing.T) {
 	app_id := ""
 	app_secret := ""
@@ -95,7 +95,7 @@ func TestPostMaterialRequest(t *testing.T) {
 	body["description"] = "测试description4"
 	body["frameworkType"] = "react"
 
-	res, err := client.request(
+	res, err := client.Request(
 		"/material/openapi/v1/material",
 		"PUT",
 		headers,

@@ -63,11 +63,11 @@ type ApiResponse struct {
 	}
 }
 
-func (c *ClientStruct) request(serviceUrl, method string, headers map[string]string, params map[string]ParamsValueType, body map[string]interface{}) (map[string]interface{}, error) {
+func (c *ClientStruct) Request(serviceUrl, method string, headers map[string]string, params map[string]ParamsValueType, body map[string]interface{}) (map[string]interface{}, error) {
 	upperCaseMethod := strings.ToUpper(method)
 
 	if c._access_token == "" || !c._valid_token() {
-		if err := c.get_token(); err != nil {
+		if err := c.GetToken(); err != nil {
 			return nil, err
 		}
 	}
@@ -104,7 +104,7 @@ func (c *ClientStruct) request(serviceUrl, method string, headers map[string]str
 	return resp, nil
 }
 
-func (c *ClientStruct) get_token() error {
+func (c *ClientStruct) GetToken() error {
 	authorizationUrl := c.env + "/open-apis/v1/authorization"
 	completedUrl := c.url + "/" + authorizationUrl
 
@@ -127,8 +127,6 @@ func (c *ClientStruct) get_token() error {
 	body, _ = ioutil.ReadAll(resp.Body)
 	json.Unmarshal(body, &apiResponse)
 
-	fmt.Println("get_token body", body)
-
 	tokenTime := time.Now().Unix()
 	if apiResponse.Code == 200 && apiResponse.Data != nil {
 		c._ttl = apiResponse.Data.Ttl
@@ -139,7 +137,7 @@ func (c *ClientStruct) get_token() error {
 	return nil
 }
 
-func (c *ClientStruct) is_authenticated() bool {
+func (c *ClientStruct) IsAuthenticated() bool {
 	return c._access_token != ""
 }
 

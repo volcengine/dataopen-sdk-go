@@ -10,7 +10,7 @@
 | env        | string or null | "dataopen"                            | 环境设置，可选值为 "dataopen" 或 "dataopen_staging" |
 | expiration | string or null | "1800"                                | 过期时间，单位是秒                                  |
 
-## client.request 参数说明
+## client.Request 参数说明
 
 | 字段        | 类型                   | 默认值 | 含义                                            |
 | ----------- | ---------------------- | ------ | ----------------------------------------------- |
@@ -22,7 +22,7 @@
 
 ## 获取与安装
 
-go get -u github.com/volcengine/dataopen-openapi-sdk
+go get -u github.com/volcengine/dataopen-sdk-go
 
 ## 举例
 
@@ -48,7 +48,7 @@ params["page"] = "1"
 
 body := make(map[string]interface{})
 
-res, err := client.request("/xxx/openapi/v1/open/flight-list", "GET", headers, params, body)
+res, err := client.Request("/xxx/openapi/v1/open/flight-list", "GET", headers, params, body)
 if err != nil {
   t.Fatal(err)
 }
@@ -75,7 +75,7 @@ params := make(map[string]ParamsValueType)
 body := make(map[string]interface{})
 body["uid_list"] = []string{"1111111110000"}
 
-res, err := client.request(
+res, err := client.Request(
   "/xxx/openapi/v1/open/flight/version/6290880/add-test-user",
   "POST",
   headers,
