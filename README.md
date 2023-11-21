@@ -29,19 +29,16 @@ go get -u github.com/volcengine/dataopen-sdk-go
 ### 1、Get 方法
 
 ```go
-
-import (
-  "github.com/volcengine/dataopen-openapi-sdk/client"
-)
+import SdkClient "github.com/volcengine/dataopen-sdk-go/client"
 
 app_id := ""
 app_secret := ""
 
-client := Client(app_id, app_secret, "", "", "")
+client := SdkClient.Client(app_id, app_secret, "", "", "")
 
 headers := make(map[string]string)
 
-params := make(map[string]ParamsValueType)
+params := make(map[string]SdkClient.ParamsValueType)
 params["app"] = "46"
 params["page_size"] = "1"
 params["page"] = "1"
@@ -66,11 +63,11 @@ import (
 app_id := ""
 app_secret := ""
 
-client := Client(app_id, app_secret, "", "", "")
+client := SdkClient.Client(app_id, app_secret, "", "", "")
 
 headers := make(map[string]string)
 
-params := make(map[string]ParamsValueType)
+params := make(map[string]SdkClient.ParamsValueType)
 
 body := make(map[string]interface{})
 body["uid_list"] = []string{"1111111110000"}
