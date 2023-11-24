@@ -21,8 +21,8 @@ import (
 	"encoding/json"
 	"io/ioutil"
 	"net/http"
-	"strings"
 	"time"
+	"strings"
 )
 
 type ParamsValueType interface{}
