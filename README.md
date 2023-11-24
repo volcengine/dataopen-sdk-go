@@ -7,7 +7,6 @@
 | app_id     | string         | 无                                    | 应用的唯一标识符                                    |
 | app_secret | string         | 无                                    | 用于应用的安全认证的密钥                            |
 | url        | string or null | "https://analytics.volcengineapi.com" | 服务器的 URL 地址                                   |
-| env        | string or null | "dataopen"                            | 环境设置，可选值为 "dataopen" 或 "dataopen_staging" |
 | expiration | string or null | "1800"                                | 过期时间，单位是秒                                  |
 
 ## client.Request 参数说明
@@ -34,7 +33,7 @@ import SdkClient "github.com/volcengine/dataopen-sdk-go/client"
 app_id := ""
 app_secret := ""
 
-client := SdkClient.Client(app_id, app_secret, "", "", "")
+client := SdkClient.Client(app_id, app_secret, "", "")
 
 headers := make(map[string]string)
 
@@ -45,7 +44,7 @@ params["page"] = "1"
 
 body := make(map[string]interface{})
 
-res, err := client.Request("/xxx/openapi/v1/open/flight-list", "GET", headers, params, body)
+res, err := client.Request("/dataopen/open-apis/xxx/openapi/v1/open/flight-list", "GET", headers, params, body)
 if err != nil {
   t.Fatal(err)
 }
@@ -63,7 +62,7 @@ import (
 app_id := ""
 app_secret := ""
 
-client := SdkClient.Client(app_id, app_secret, "", "", "")
+client := SdkClient.Client(app_id, app_secret, "", "")
 
 headers := make(map[string]string)
 
@@ -73,7 +72,7 @@ body := make(map[string]interface{})
 body["uid_list"] = []string{"1111111110000"}
 
 res, err := client.Request(
-  "/xxx/openapi/v1/open/flight/version/6290880/add-test-user",
+  "/dataopen/open-apis/xxx/openapi/v1/open/flight/version/6290880/add-test-user",
   "POST",
   headers,
   params,

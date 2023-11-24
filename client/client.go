@@ -30,18 +30,14 @@ type ParamsValueType interface{}
 
 type ClientStruct struct {
 	app_id, app_secret   string
-	url, env, expiration string
+	url, expiration string
 	_access_token        string
 	_ttl, _token_time    int64
 }
 
-func Client(app_id, app_secret, url, env, expiration string) *ClientStruct {
+func Client(app_id, app_secret, url, expiration string) *ClientStruct {
 	if url == "" {
 		url = "https://analytics.volcengineapi.com"
-	}
-
-	if env == "" {
-		env = "dataopen"
 	}
 
 	if expiration == "" {
@@ -49,7 +45,7 @@ func Client(app_id, app_secret, url, env, expiration string) *ClientStruct {
 	}
 
 	return &ClientStruct{
-		app_id: app_id, app_secret: app_secret, url: url, env: env, expiration: expiration,
+		app_id: app_id, app_secret: app_secret, url: url, expiration: expiration,
 		_ttl: 0, _access_token: "", _token_time: 0,
 	}
 }
@@ -81,7 +77,7 @@ func (c *ClientStruct) Request(serviceUrl, method string, headers map[string]str
 		newHeaders[key] = value
 	}
 
-	completedUrl := c.url + "/" + c.env + "/open-apis" + serviceUrl
+	completedUrl := c.url + serviceUrl
 	queryUrl := c._joint_query(completedUrl, params)
 
 	var resp map[string]interface{}
@@ -105,8 +101,8 @@ func (c *ClientStruct) Request(serviceUrl, method string, headers map[string]str
 }
 
 func (c *ClientStruct) GetToken() error {
-	authorizationUrl := c.env + "/open-apis/v1/authorization"
-	completedUrl := c.url + "/" + authorizationUrl
+	authorizationUrl := "/dataopen/open-apis/v1/authorization"
+	completedUrl := c.url + authorizationUrl
 
 	mapBody := map[string]string{
 		"app_id":     c.app_id,
