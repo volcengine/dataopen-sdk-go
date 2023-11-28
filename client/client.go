@@ -112,6 +112,7 @@ func (c *ClientStruct) GetToken() error {
 	body, _ := json.Marshal(mapBody)
 	req, _ := http.NewRequest("POST", completedUrl, bytes.NewBuffer(body))
 	req.Header.Set("Content-Type", "application/json")
+	req.Header.Set("x-sdk-source", "go")
 
 	client := &http.Client{}
 	resp, err := client.Do(req)
