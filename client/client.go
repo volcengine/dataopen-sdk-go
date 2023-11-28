@@ -70,6 +70,7 @@ func (c *ClientStruct) Request(serviceUrl, method string, headers map[string]str
 	newHeaders := map[string]string{
 		"Authorization": c._access_token,
 		"Content-Type":  "application/json",
+		"x-sdk-source":  "go",
 	}
 
 	for key, value := range headers {
